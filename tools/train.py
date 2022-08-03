@@ -59,6 +59,9 @@ def make_parser():
         "--machine_rank", default=0, type=int, help="node rank for multi-node training"
     )
     parser.add_argument(
+        "--epochs", default=3, type=int, help="num of epochs for training"
+    )
+    parser.add_argument(
         "--fp16",
         dest="fp16",
         default=False,
@@ -121,7 +124,7 @@ def main(exp: Exp, args):
 if __name__ == "__main__":
     configure_module()
     args = make_parser().parse_args()
-    exp = get_exp(args.exp_file, args.name)
+    exp = get_exp(args.exp_file, args.name, args.epochs)
     exp.merge(args.opts)
 
     if not args.experiment_name:
