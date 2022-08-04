@@ -40,8 +40,8 @@ class COCODataset(Dataset):
     def __init__(
         self,
         data_dir=None,
-        json_file="instances_train2017.json",
-        name="train2017",
+        json_file="_annotations.coco.json",
+        name="train",
         img_size=(416, 416),
         preproc=None,
         cache=False,
@@ -61,7 +61,7 @@ class COCODataset(Dataset):
         self.data_dir = data_dir
         self.json_file = json_file
 
-        self.coco = COCO(os.path.join(self.data_dir, "annotations", self.json_file))
+        self.coco = COCO(os.path.join(self.data_dir, self.json_file))
         remove_useless_info(self.coco)
         self.ids = self.coco.getImgIds()
         self.class_ids = sorted(self.coco.getCatIds())
